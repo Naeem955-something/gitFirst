@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediScript Landing Page</title>
+    <link href="css/output.css" rel="stylesheet" />
+  </head>
+  <body class="bg-gray-50 text-gray-800 font-sans">
+    <!-- Header -->
+    <header class="w-full bg-white shadow-md">
+      <div class="flex justify-between items-center w-full px-[60px] py-4">
+        <!-- Logo -->
+        <div class="flex items-center gap-2">
+          <img src="img/Logo.png" alt="Logo" class="w-8 h-8" />
+          <span class="text-2xl font-bold text-info-content">MediScript</span>
+        </div>
+
+        <!-- Nav + Button -->
+        <div class="flex items-center gap-6">
+          <a
+            href="javascript:void(0)"
+            class="text-info-content text-lg hover:text-info font-medium"
+            >About Us</a
+          >
+          <button
+            class="btn btn-soft btn-info text-lg"
+            onclick="login_modal.showModal()"
+          >
+            Login
+          </button>
+          <dialog id="login_modal" class="modal">
+            <div class="modal-box">
+              <form method="dialog">
+                <button
+                  class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                >
+                  ✕
+                </button>
+              </form>
+              <h3 class="font-bold text-lg mb-4">Login</h3>
+              <form id="loginForm" class="space-y-3">
+                <select name="role" class="select select-bordered w-full">
+                  <option value="patient">Patient</option>
+                  <option value="doctor">Doctor</option>
+                  <option value="admin">Admin</option>
+                </select>
+                <input
+                  name="user_id"
+                  class="input input-bordered w-full"
+                  placeholder="User ID"
+                  required
+                />
+                <input
+                  name="password"
+                  type="password"
+                  class="input input-bordered w-full"
+                  placeholder="Password"
+                  required
+                />
+                <button type="submit" class="btn btn-info w-full">Login</button>
+                <p
+                  class="text-sm text-right text-blue-500 cursor-pointer"
+                  onclick="showForgotPasswordModal()"
+                >
+                  Forgot Password?
+                </p>
+              </form>
+            </div>
+          </dialog>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="flex items-center justify-between px-28 py-20">
+      <!-- Left text content -->
+      <div class="w-1/2 ml-7">
+        <!-- move text slightly right -->
+        <h1 class="text-5xl font-bold text-info-content mb-4">
+          Smarter Prescriptions, Safer Care
+        </h1>
+        <p class="text-gray-600 text-lg mb-6">
+          From doctor consultations to refill requests, MediScript brings your
+          entire prescription journey online — secure, simple, and efficient.
+        </p>
+        <div class="flex gap-4">
+          <!-- ✅ APPLY AS DOCTOR MODAL -->
+          <button
+            class="btn btn-soft btn-info text-lg"
+            onclick="doctor_modal.showModal()"
+          >
+            Apply as a Doctor
+          </button>
+          <dialog id="doctor_modal" class="modal">
+            <div class="modal-box max-w-2xl">
+              <form method="dialog">
+                <button
+                  class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                >
+                  ✕
+                </button>
+              </form>
+              <h3 class="font-bold text-lg mb-4">Doctor Application</h3>
+              <form
+                id="doctorForm"
+                class="grid grid-cols-2 gap-3"
+                enctype="multipart/form-data"
+              >
+                <input
+                  name="doctor_id"
+                  class="input input-bordered col-span-2"
+                  placeholder="Doctor ID"
+                  required
+                />
+                <input
+                  name="full_name"
+                  class="input input-bordered col-span-2"
+                  placeholder="Full Name"
+                  required
+                />
+                <input
+                  name="email"
+                  type="email"
+                  class="input input-bordered"
+                  placeholder="Email"
+                  required
+                />
+                <input
+                  name="password"
+                  type="password"
+                  class="input input-bordered"
+                  placeholder="Password"
+                  required
+                />
+                <input
+                  name="phone_number"
+                  class="input input-bordered"
+                  placeholder="Phone Number"
+                  required
+                />
+                <input
+                  name="age"
+                  type="number"
+                  class="input input-bordered"
+                  placeholder="Age"
+                  required
+                />
+                <select name="gender" class="select select-bordered" required>
+                  <option disabled selected>Gender</option>
+                  <option>Male</option>
+                  <option>Female</option>
+                  <option>Other</option>
+                </select>
+                <input
+                  name="specialization"
+                  class="input input-bordered"
+                  placeholder="Specialization"
+                  required
+                />
+                <input
+                  name="bmdc_number"
+                  class="input input-bordered"
+                  placeholder="BMDC Number"
+                  required
+                />
+                <input
+                  name="current_hospital"
+                  class="input input-bordered col-span-2"
+                  placeholder="Current Hospital"
+                  required
+                />
+                <input
+                  name="experience_years"
+                  type="number"
+                  class="input input-bordered col-span-2"
+                  placeholder="Years of Experience"
+                  required
+                />
+                <label class="label col-span-2"
+                  >Upload BMDC License (PDF)</label
+                >
+                <input
+                  type="file"
+                  name="license_pdf"
+                  accept="application/pdf"
+                  class="file-input file-input-bordered col-span-2"
+                  required
+                />
+                <button type="submit" class="btn btn-info col-span-2 mt-2">
+                  Submit Application
+                </button>
+              </form>
+            </div>
+          </dialog>
+          <!-- ✅ REGISTER MODAL (Patient) -->
+          <button
+            class="btn btn-soft btn-info text-lg"
+            onclick="register_modal.showModal()"
+          >
+            Register
+          </button>
+          <dialog id="register_modal" class="modal">
+            <div class="modal-box">
+              <form method="dialog">
+                <button
+                  class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                >
+                  ✕
+                </button>
+              </form>
+              <h3 class="font-bold text-lg mb-4">Register as Patient</h3>
+              <form id="registerForm" class="grid gap-3">
+                <input
+                  name="patient_id"
+                  class="input input-bordered"
+                  placeholder="Patient ID"
+                  required
+                />
+                <input
+                  name="full_name"
+                  class="input input-bordered"
+                  placeholder="Full Name"
+                  required
+                />
+                <input
+                  name="email"
+                  type="email"
+                  class="input input-bordered"
+                  placeholder="Email"
+                  required
+                />
+                <input
+                  name="password"
+                  type="password"
+                  class="input input-bordered"
+                  placeholder="Password"
+                  required
+                />
+                <input
+                  name="age"
+                  type="number"
+                  class="input input-bordered"
+                  placeholder="Age"
+                  required
+                />
+                <select name="gender" class="select select-bordered">
+                  <option disabled selected>Select Gender</option>
+                  <option>Male</option>
+                  <option>Female</option>
+                  <option>Other</option>
+                </select>
+                <input
+                  name="blood_group"
+                  class="input input-bordered"
+                  placeholder="Blood Group"
+                  required
+                />
+                <input
+                  name="phone_number"
+                  class="input input-bordered"
+                  placeholder="Phone Number"
+                  required
+                />
+                <button type="submit" class="btn btn-info mt-2">
+                  Register
+                </button>
+              </form>
+            </div>
+          </dialog>
+        </div>
+      </div>
+
+      <!-- ✅ FORGOT PASSWORD MODAL -->
+      <dialog id="forgot_modal" class="modal">
+        <div class="modal-box">
+          <form method="dialog">
+            <button
+              class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            >
+              ✕
+            </button>
+          </form>
+          <h3 class="font-bold text-lg mb-4">Forgot Password</h3>
+          <form id="forgotForm" class="grid gap-3">
+            <input
+              name="email"
+              type="email"
+              class="input input-bordered"
+              placeholder="Your Email"
+              required
+            />
+            <button type="submit" class="btn btn-info">Send OTP</button>
+          </form>
+          <form id="otpForm" class="grid gap-3 hidden mt-4">
+            <input
+              name="user_id"
+              class="input input-bordered"
+              placeholder="User ID"
+              required
+            />
+            <input
+              name="otp_code"
+              class="input input-bordered"
+              placeholder="Enter OTP"
+              required
+            />
+            <button type="submit" class="btn btn-success">Verify OTP</button>
+          </form>
+
+          <form id="resetForm" class="grid gap-3 hidden mt-4">
+            <input
+              name="user_id"
+              class="input input-bordered"
+              placeholder="User ID"
+              readonly
+            />
+            <input
+              name="new_password"
+              type="password"
+              class="input input-bordered"
+              placeholder="New Password"
+              required
+            />
+            <button type="submit" class="btn btn-warning">
+              Reset Password
+            </button>
+          </form>
+        </div>
+      </dialog>
+
+      <!-- Right image -->
+      <div class="w-1/2 ml-10">
+        <!-- move image slightly right -->
+        <img src="img/hero.png" alt="Doctors" class="w-full max-w-md mx-auto" />
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section
+      class="flex flex-wrap justify-center gap-6 px-6 md:px-20 py-12 bg-gray-100"
+    >
+      <div class="bg-white shadow-md rounded-xl px-6 py-8 w-64 text-center">
+        <h3 class="text-2xl font-bold text-info-content">500+</h3>
+        <p class="text-gray-600 mt-2">Expert Doctors</p>
+      </div>
+      <div class="bg-white shadow-md rounded-xl px-6 py-8 w-64 text-center">
+        <h3 class="text-2xl font-bold text-info-content">20k+</h3>
+        <p class="text-gray-600 mt-2">Happy Patients</p>
+      </div>
+      <div class="bg-white shadow-md rounded-xl px-6 py-8 w-64 text-center">
+        <h3 class="text-2xl font-bold text-info-content">24/7</h3>
+        <p class="text-gray-600 mt-2">Medicine Supply</p>
+      </div>
+      <div class="bg-white shadow-md rounded-xl px-6 py-8 w-64 text-center">
+        <h3 class="text-2xl font-bold text-info-content">5k+</h3>
+        <p class="text-gray-600 mt-2">Issued Prescriptions</p>
+      </div>
+    </section>
+    <script src="js/auth.js"></script>
+  </body>
+</html>

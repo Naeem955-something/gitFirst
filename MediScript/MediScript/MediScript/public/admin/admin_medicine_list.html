@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Medicine Master List | MediScript Admin</title>
+    <link href="../css/output.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <!-- Sidebar -->
+    <aside class="w-64 h-screen bg-white shadow fixed">
+      <div
+        class="p-6 font-bold text-2xl text-blue-700 border-b border-gray-200"
+      >
+        <i class="fas fa-notes-medical mr-2"></i> MediScript
+      </div>
+      <nav class="mt-4 space-y-2 text-gray-700 font-medium px-4">
+        <a
+          href="dashboard.html"
+          class="flex items-center space-x-2 hover:text-blue-600"
+        >
+          <i class="fas fa-chart-line"></i> <span>Dashboard</span>
+        </a>
+        <a
+          href="admin_doctor_management.html"
+          class="flex items-center space-x-2 hover:text-blue-600"
+        >
+          <i class="fas fa-user-md"></i> <span>Doctor Management</span>
+        </a>
+        <a
+          href="doctor_applications.html"
+          class="flex items-center space-x-2 hover:text-blue-600"
+        >
+          <i class="fas fa-user-plus"></i> <span>Doctor Applications</span>
+        </a>
+        <a
+          href="admin_patient_management.html"
+          class="flex items-center space-x-2 hover:text-blue-600"
+        >
+          <i class="fas fa-user-injured"></i> <span>Patient Management</span>
+        </a>
+        <a
+          href="admin_patient_refillReq.html"
+          class="flex items-center space-x-2 hover:text-blue-600"
+        >
+          <i class="fa-solid fa-cart-shopping"></i> <span>Refill Requests</span>
+        </a>
+        <a
+          href="admin_medicine_list.html"
+          class="flex items-center space-x-2 text-blue-600 font-semibold"
+        >
+          <i class="fas fa-pills"></i> <span>Medicine Master List</span>
+        </a>
+        <a
+          href="admin_medicine_management.html"
+          class="flex items-center space-x-2 hover:text-blue-600"
+        >
+          <i class="fa-solid fa-capsules"></i>
+          <span>Medicine Refill management</span>
+        </a>
+        <a
+          href="admin_reports.html"
+          class="flex items-center space-x-2 hover:text-blue-600"
+        >
+          <i class="fas fa-flag"></i> <span>Reported Issues</span>
+        </a>
+        <a
+          href="#"
+          onclick="logout()"
+          class="flex items-center space-x-2 text-red-600 hover:text-red-800 mt-10"
+        >
+          <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <main class="ml-64 p-8">
+      <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl font-bold text-blue-700">
+          <i class="fas fa-pills mr-2"></i> Medicine Master List
+        </h1>
+        <button
+          onclick="openAddMedicineModal()"
+          class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded shadow"
+        >
+          <i class="fas fa-plus mr-1"></i> Add New Medicine
+        </button>
+      </div>
+
+      <div class="flex justify-between items-center mb-4">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search by name, type..."
+          class="border p-2 rounded w-1/3"
+          oninput="filterMedicines()"
+        />
+        <button
+          onclick="removeExpiredMedicines()"
+          class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded"
+        >
+          <i class="fas fa-trash-alt mr-1"></i> Remove Expired Drugs
+        </button>
+      </div>
+
+      <div class="overflow-x-auto bg-white shadow rounded">
+        <table class="w-full text-sm text-left table-auto">
+          <thead class="bg-blue-100 text-blue-700">
+            <tr>
+              <th class="px-4 py-3">Name</th>
+              <th>Type</th>
+              <th>Strength</th>
+              <th>Generic</th>
+              <th>Batch No.</th>
+              <th>Category</th>
+              <th>Qty</th>
+              <th>Price</th>
+              <th>MFD</th>
+              <th>EXP</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="medicineTableBody">
+            <!-- JS will populate this -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <!-- Add Medicine Modal -->
+    <div
+      id="addMedicineModal"
+      class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50"
+    >
+      <div class="bg-white p-6 rounded shadow-lg w-full max-w-2xl">
+        <h2 class="text-xl font-semibold mb-4 text-blue-700">
+          Add New Medicine
+        </h2>
+        <form id="addMedicineForm" class="grid grid-cols-2 gap-4">
+          <input
+            name="name"
+            type="text"
+            placeholder="Medicine Name"
+            class="border p-2 rounded"
+            required
+          />
+          <select name="type" class="border p-2 rounded" required>
+            <option value="">Select Type</option>
+            <option value="Tablet">Tablet</option>
+            <option value="Capsule">Capsule</option>
+            <option value="Syrup">Syrup</option>
+          </select>
+          <input
+            name="strength"
+            type="text"
+            placeholder="Strength (e.g., 500mg)"
+            class="border p-2 rounded"
+          />
+          <input
+            name="generic_name"
+            type="text"
+            placeholder="Generic Name"
+            class="border p-2 rounded"
+          />
+          <input
+            name="batch_no"
+            type="text"
+            placeholder="Batch No."
+            class="border p-2 rounded"
+            required
+          />
+          <input
+            name="category"
+            type="text"
+            placeholder="Category"
+            class="border p-2 rounded"
+          />
+          <input
+            name="quantity"
+            type="number"
+            min="0"
+            placeholder="Quantity"
+            class="border p-2 rounded"
+            required
+          />
+          <input
+            name="price"
+            type="number"
+            step="0.5"
+            placeholder="Price per strip/bottle"
+            class="border p-2 rounded"
+          />
+          <input
+            name="mfd"
+            type="date"
+            placeholder="MFD"
+            class="border p-2 rounded"
+            required
+          />
+          <input
+            name="exp"
+            type="date"
+            placeholder="EXP"
+            class="border p-2 rounded"
+            required
+          />
+        </form>
+        <div class="mt-4 flex justify-end space-x-2">
+          <button
+            onclick="closeAddMedicineModal()"
+            class="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            form="addMedicineForm"
+            class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+    <script>
+      function logout() {
+        fetch("/auth/logout", { method: "POST" })
+          .then(() => (window.location.href = "/"))
+          .catch(() => alert("Logout failed."));
+      }
+    </script>
+    <script src="../js/admin_medicine_list.js"></script>
+  </body>
+</html>

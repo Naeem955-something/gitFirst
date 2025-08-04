@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Write Prescription | MediScript</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link href="../css/output.css" rel="stylesheet" />
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <!-- Sidebar -->
+    <aside class="w-64 h-screen bg-white shadow fixed">
+      <div
+        class="p-6 font-bold text-2xl text-blue-700 border-b border-gray-200"
+      >
+        <i class="fas fa-notes-medical mr-2"></i> MediScript
+      </div>
+      <nav class="mt-4 space-y-2 text-gray-700 font-medium px-4">
+        <a
+          href="dashboard.html"
+          class="flex items-center space-x-2 hover:text-blue-600"
+        >
+          <i class="fas fa-home"></i> <span>Dashboard</span>
+        </a>
+        <a
+          href="doctor_profile.html"
+          class="flex items-center space-x-2 hover:text-blue-600"
+        >
+          <i class="fas fa-user-md"></i> <span>Profile</span>
+        </a>
+        <a
+          href="doctor_patients.html"
+          class="flex items-center space-x-2 hover:text-blue-600"
+        >
+          <i class="fas fa-users"></i> <span>My Patients</span>
+        </a>
+        <a
+          href="doctor_prescribe.html"
+          class="flex items-center space-x-2 text-blue-600 font-semibold"
+        >
+          <i class="fas fa-prescription"></i> <span>Write Prescription</span>
+        </a>
+        <a
+          href="doctor_history.html"
+          class="flex items-center space-x-2 hover:text-blue-600"
+        >
+          <i class="fas fa-file-medical-alt"></i>
+          <span>Past Prescriptions</span>
+        </a>
+        <a
+          href="doctor_report.html"
+          class="flex items-center space-x-2 hover:text-blue-600"
+        >
+          <i class="fas fa-flag"></i> <span>Report Issue</span>
+        </a>
+        <a
+          href="#"
+          onclick="logout()"
+          class="flex items-center space-x-2 text-red-600 hover:text-red-800 mt-10"
+        >
+          <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <main class="ml-64 p-8">
+      <h1 class="text-2xl font-bold text-blue-700 mb-4">
+        <i class="fas fa-prescription mr-2"></i> Write Prescription
+      </h1>
+
+      <!-- Search Form -->
+      <div class="bg-white p-4 rounded shadow mb-6 flex items-center space-x-4">
+        <input
+          type="text"
+          id="patientIdInput"
+          placeholder="Enter Patient ID"
+          class="border px-4 py-2 rounded w-1/3"
+        />
+        <button
+          onclick="searchPatient()"
+          class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
+        >
+          <i class="fas fa-search mr-1"></i> Search
+        </button>
+      </div>
+
+      <!-- Patient Overview Card -->
+      <div id="patientCard" class="hidden bg-white rounded shadow p-6 mb-6">
+        <h2 class="text-lg font-semibold text-blue-700 mb-2">
+          👤 Patient Overview
+        </h2>
+        <div class="grid grid-cols-2 gap-4">
+          <p><strong>Name:</strong> <span id="patientName"></span></p>
+          <p><strong>ID:</strong> <span id="patientId"></span></p>
+          <p><strong>Age:</strong> <span id="patientAge"></span></p>
+          <p><strong>Gender:</strong> <span id="patientGender"></span></p>
+          <p><strong>Phone:</strong> <span id="patientPhone"></span></p>
+        </div>
+      </div>
+
+      <!-- Past Prescriptions -->
+      <div id="pastPrescriptionsSection" class="hidden mb-6">
+        <h2 class="text-lg font-semibold text-blue-700 mb-2">
+          🧠 Past Prescriptions
+        </h2>
+        <div class="overflow-x-auto bg-white rounded shadow">
+          <table class="w-full text-sm text-left">
+            <thead class="bg-blue-100 text-blue-700">
+              <tr>
+                <th class="px-4 py-2">Prescription ID</th>
+                <th>Doctor</th>
+                <th>Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="prescriptionTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Past Medicines -->
+      <div id="pastMedicinesSection" class="hidden mb-6">
+        <h2 class="text-lg font-semibold text-blue-700 mb-2">
+          💊 Drug History
+        </h2>
+        <div class="overflow-x-auto bg-white rounded shadow">
+          <table class="w-full text-sm text-left">
+            <thead class="bg-blue-100 text-blue-700">
+              <tr>
+                <th class="px-4 py-2">Medicine</th>
+                <th>Dosage</th>
+                <th>Timing</th>
+                <th>Duration</th>
+              </tr>
+            </thead>
+            <tbody id="medicineTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Add Prescription Button -->
+      <div id="addPrescriptionBtnWrap" class="hidden text-center mt-6">
+        <a
+          id="addPrescriptionLink"
+          class="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded text-lg font-semibold inline-block"
+        >
+          ➕ Add Prescription
+        </a>
+      </div>
+    </main>
+
+    <script src="../js/doctor_prescribe.js"></script>
+    <script>
+      function logout() {
+        fetch("/auth/logout", { method: "POST" })
+          .then(() => (window.location.href = "/"))
+          .catch(() => alert("Logout failed."));
+      }
+    </script>
+  </body>
+</html>

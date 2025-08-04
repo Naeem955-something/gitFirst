@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Patient Profile - MediScript</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body class="bg-gray-100 flex">
+    <!-- Sidebar -->
+    <aside class="w-64 h-screen bg-white shadow fixed">
+      <div
+        class="p-6 font-bold text-2xl text-blue-700 border-b border-gray-200"
+      >
+        <i class="fas fa-notes-medical mr-2"></i> MediScript
+      </div>
+      <nav class="mt-4 space-y-2 text-gray-700 font-medium px-4">
+        <a
+          href="/dashboard/patient.html"
+          class="flex items-center space-x-2 hover:text-blue-600"
+          ><i class="fas fa-chart-pie"></i> <span>Dashboard</span></a
+        >
+        <a
+          href="/dashboard/patient_profile.html"
+          class="flex items-center space-x-2 text-blue-600 font-semibold"
+          ><i class="fas fa-user"></i> <span>Profile</span></a
+        >
+        <a href="#" class="flex items-center space-x-2 hover:text-blue-600"
+          ><i class="fas fa-file-medical"></i> <span>My Prescriptions</span></a
+        >
+        <a href="#" class="flex items-center space-x-2 hover:text-blue-600"
+          ><i class="fas fa-capsules"></i> <span>Refill Requests</span></a
+        >
+        <a href="#" class="flex items-center space-x-2 hover:text-blue-600"
+          ><i class="fas fa-user-md"></i> <span>Doctors Consulted</span></a
+        >
+        <a href="#" class="flex items-center space-x-2 hover:text-blue-600"
+          ><i class="fas fa-pills"></i> <span>Drug History</span></a
+        >
+        <a href="#" class="flex items-center space-x-2 hover:text-blue-600"
+          ><i class="fas fa-address-book"></i> <span>Doctor List</span></a
+        >
+        <a
+          href="/"
+          class="flex items-center space-x-2 text-red-600 hover:text-red-800 mt-10"
+          ><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a
+        >
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <main class="ml-64 w-full p-6">
+      <div class="max-w-4xl mx-auto bg-white shadow rounded p-6">
+        <!-- Header Section -->
+        <div class="flex justify-between items-center mb-6">
+          <div class="flex items-center space-x-4">
+            <div class="relative">
+              <img
+                id="profileImage"
+                src="/images/default-profile.png"
+                class="w-24 h-24 rounded-full object-cover border"
+              />
+              <input
+                id="photoInput"
+                type="file"
+                class="hidden"
+                accept="image/*"
+              />
+              <button
+                id="uploadBtn"
+                onclick="document.getElementById('photoInput').click()"
+                class="hidden absolute top-0 right-0 bg-white p-1 border rounded-full text-xs"
+              >
+                Upload
+              </button>
+            </div>
+            <div>
+              <h2 class="text-xl font-semibold">
+                Patient ID: <span id="patientId">#1234567</span>
+              </h2>
+            </div>
+          </div>
+          <div>
+            <button
+              id="editBtn"
+              onclick="enableEdit()"
+              class="bg-blue-600 text-white px-4 py-2 rounded"
+            >
+              Update Profile
+            </button>
+            <div id="editActions" class="hidden space-x-2">
+              <button
+                onclick="saveProfile()"
+                class="bg-green-600 text-white px-4 py-2 rounded"
+              >
+                Save Changes
+              </button>
+              <button
+                onclick="cancelEdit()"
+                class="bg-gray-500 text-white px-4 py-2 rounded"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <form id="profileForm" class="space-y-6">
+          <!-- Personal Details -->
+          <section>
+            <h3 class="text-lg font-semibold mb-2">Personal Details</h3>
+            <div class="grid grid-cols-2 gap-4">
+              <input
+                name="full_name"
+                placeholder="Full Name"
+                class="border p-2"
+                disabled
+              />
+              <select name="gender" class="border p-2" disabled>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+              <input name="dob" type="date" class="border p-2" disabled />
+              <select name="blood_group" class="border p-2" disabled>
+                <option value="">Select Blood Group</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+              </select>
+            </div>
+          </section>
+
+          <!-- Contact Information -->
+          <section>
+            <h3 class="text-lg font-semibold mb-2">Contact Information</h3>
+            <div class="grid grid-cols-2 gap-4">
+              <input
+                name="email"
+                type="email"
+                placeholder="Email"
+                class="border p-2"
+                disabled
+              />
+              <input
+                name="phone"
+                placeholder="Phone Number"
+                class="border p-2"
+                disabled
+              />
+              <input
+                name="address"
+                placeholder="Address"
+                class="border p-2 col-span-2"
+                disabled
+              />
+            </div>
+          </section>
+
+          <!-- Medical Information -->
+          <section>
+            <h3 class="text-lg font-semibold mb-2">Medical Information</h3>
+            <div class="grid grid-cols-2 gap-4">
+              <input
+                name="chronic_conditions"
+                placeholder="Chronic Conditions"
+                class="border p-2 col-span-2"
+                disabled
+              />
+              <input
+                name="allergies"
+                placeholder="Allergies"
+                class="border p-2 col-span-2"
+                disabled
+              />
+              <input
+                name="past_surgeries"
+                placeholder="Past Surgeries (optional)"
+                class="border p-2 col-span-2"
+                disabled
+              />
+              <input
+                name="family_history"
+                placeholder="Family Medical History (optional)"
+                class="border p-2 col-span-2"
+                disabled
+              />
+            </div>
+          </section>
+        </form>
+      </div>
+    </main>
+
+    <script src="/js/patientProfile.js"></script>
+  </body>
+</html>

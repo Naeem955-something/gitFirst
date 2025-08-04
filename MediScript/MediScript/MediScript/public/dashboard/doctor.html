@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Doctor Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <div class="flex min-h-screen">
+      <!-- Sidebar -->
+      <aside class="w-64 bg-white p-6 border-r">
+        <h2 class="text-2xl font-bold mb-6">Doctor</h2>
+        <nav class="space-y-4">
+          <a
+            href="#"
+            onclick="showSection('home')"
+            class="block text-blue-600 font-medium"
+            >Dashboard</a
+          >
+          <a href="/dashboard/doctor_profile.html" class="block">Profile</a>
+          <a href="/" class="block text-red-600 mt-10">Logout</a>
+        </nav>
+      </aside>
+
+      <!-- Main content -->
+      <main class="flex-1 p-8 space-y-8">
+        <!-- Dashboard welcome -->
+        <section id="homeSection">
+          <h1 class="text-2xl font-bold mb-4">Welcome, Doctor 👨‍⚕️</h1>
+          <p>
+            This is your MediScript dashboard. Start by reviewing your profile.
+          </p>
+        </section>
+
+        <!-- Dashboard Cards -->
+        <section class="grid grid-cols-3 gap-6 mb-6">
+          <div class="bg-white p-6 rounded shadow">
+            <h2 class="text-lg font-medium">Total Patients</h2>
+            <p id="cardPatients" class="text-3xl text-blue-600">0</p>
+          </div>
+          <div class="bg-white p-6 rounded shadow">
+            <h2 class="text-lg font-medium">Prescriptions</h2>
+            <p id="cardPrescriptions" class="text-3xl text-green-600">0</p>
+          </div>
+          <div class="bg-white p-6 rounded shadow">
+            <h2 class="text-lg font-medium">Appointments Today</h2>
+            <p id="cardAppointments" class="text-3xl text-yellow-600">0</p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/js/doctor.js"></script>
+  </body>
+</html>

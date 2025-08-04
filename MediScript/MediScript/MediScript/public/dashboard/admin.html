@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <div class="flex min-h-screen">
+      <!-- Sidebar -->
+      <aside class="w-64 bg-white p-6 border-r">
+        <h2 class="text-2xl font-bold mb-6">Admin</h2>
+        <nav class="space-y-4">
+          <a
+            href="#"
+            onclick="showSection('dashboard')"
+            class="flex items-center space-x-2 hover:text-blue-600"
+            >Dashboard</a
+          >
+          <a
+            href="/dashboard/admin_applications.html"
+            class="flex items-center space-x-2 hover:text-blue-600"
+            >Doctor Applications</a
+          >
+
+          <a
+            href="#"
+            onclick="showSection('profile')"
+            class="flex items-center space-x-2 hover:text-blue-600"
+            >Profile</a
+          >
+          <a href="/" class="flex items-center space-x-2 hover:text-blue-600"
+            >Logout</a
+          >
+        </nav>
+      </aside>
+
+      <!-- Main content -->
+      <main class="flex-1 p-8 space-y-8">
+        <!-- Dashboard Cards -->
+        <section id="dashboardSection">
+          <h1 class="text-2xl font-bold mb-4">Dashboard Overview</h1>
+          <div class="grid grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded shadow">
+              <h2 class="text-xl font-semibold">Total Patients</h2>
+              <p id="totalPatients" class="text-3xl text-blue-600">0</p>
+            </div>
+            <div class="bg-white p-6 rounded shadow">
+              <h2 class="text-xl font-semibold">Total Doctors</h2>
+              <p id="totalDoctors" class="text-3xl text-green-600">0</p>
+            </div>
+            <div class="bg-white p-6 rounded shadow">
+              <h2 class="text-xl font-semibold">Pending Applications</h2>
+              <p id="pendingApps" class="text-3xl text-yellow-600">0</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Applications Section -->
+        <section id="applicationsSection" class="hidden">
+          <h2 class="text-2xl font-semibold mb-4">
+            Pending Doctor Applications
+          </h2>
+          <table class="w-full bg-white rounded shadow overflow-hidden">
+            <thead class="bg-gray-200 text-left">
+              <tr>
+                <th class="p-3">Name</th>
+                <th class="p-3">Email</th>
+                <th class="p-3">Specialization</th>
+                <th class="p-3">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="applicationsTable"></tbody>
+          </table>
+        </section>
+
+        <!-- Profile Section -->
+        <section id="profileSection" class="hidden">
+          <h2 class="text-2xl font-semibold mb-4">Profile</h2>
+          <p>Coming soon...</p>
+        </section>
+      </main>
+    </div>
+
+    <script src="/js/admin.js"></script>
+  </body>
+</html>

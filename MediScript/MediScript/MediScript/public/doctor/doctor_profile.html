@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctor Profile - MediScript</title>
+    <link href="../css/output.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body class="bg-gray-100 flex font-sans">
+    <!-- Sidebar -->
+    <aside class="w-64 h-screen bg-white shadow fixed">
+      <div
+        class="p-6 font-bold text-2xl text-blue-700 border-b border-gray-200"
+      >
+        <i class="fas fa-notes-medical mr-2"></i> MediScript
+      </div>
+      <nav class="mt-4 space-y-2 text-gray-700 font-medium px-4">
+        <a
+          href="dashboard.html"
+          class="flex items-center space-x-2 hover:text-blue-600"
+        >
+          <i class="fas fa-chart-pie"></i> <span>Dashboard</span>
+        </a>
+        <a
+          href="doctor_profile.html"
+          class="flex items-center space-x-2 text-blue-600 font-semibold"
+        >
+          <i class="fas fa-user"></i> <span>Profile</span>
+        </a>
+        <a href="#" class="flex items-center space-x-2 hover:text-blue-600">
+          <i class="fas fa-users"></i> <span>My Patients</span>
+        </a>
+        <a
+          href="doctor_prescribe.html"
+          class="flex items-center space-x-2 hover:text-blue-600"
+        >
+          <i class="fas fa-prescription"></i> <span>Write Prescription</span>
+        </a>
+        <a href="#" class="flex items-center space-x-2 hover:text-blue-600">
+          <i class="fas fa-history"></i> <span>Past Prescriptions</span>
+        </a>
+        <a href="#" class="flex items-center space-x-2 hover:text-blue-600">
+          <i class="fas fa-flag"></i> <span>Report Issue</span>
+        </a>
+        <a
+          href="#"
+          onclick="logout()"
+          class="flex items-center space-x-2 text-red-600 hover:text-red-800 mt-10"
+        >
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <main class="ml-64 w-full p-6 overflow-y-auto">
+      <div class="max-w-3xl mx-auto bg-white rounded-xl shadow p-6">
+        <!-- Header -->
+        <div class="flex justify-between items-start mb-6">
+          <div class="flex items-center gap-4">
+            <div class="relative">
+              <img
+                id="avatarPreview"
+                src="../images/default-profile.png"
+                class="w-24 h-24 rounded-full object-cover border"
+              />
+              <input
+                type="file"
+                class="hidden"
+                id="profileImageInput"
+                name="profile_picture"
+                accept="image/*"
+              />
+              <button
+                id="changePhotoBtn"
+                class="hidden absolute bottom-0 right-0 bg-gray-200 rounded-full p-1 shadow"
+              >
+                <i class="fas fa-camera"></i>
+              </button>
+            </div>
+            <div>
+              <p class="text-lg font-bold text-blue-700" id="profile_name">
+                Dr. Full Name
+              </p>
+              <p class="text-sm text-gray-600" id="doctor_id_label">
+                Doctor ID: DOCXXXX
+              </p>
+            </div>
+          </div>
+          <div>
+            <button
+              id="editBtn"
+              class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            >
+              Update Profile
+            </button>
+            <div class="hidden space-x-2" id="editActions">
+              <button type="button" id="cancelBtn" class="btn btn-outline">
+                Cancel
+              </button>
+              <button type="submit" form="profileForm" class="btn btn-info">
+                Save Changes
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- View Mode -->
+        <div id="profileView" class="space-y-6">
+          <section>
+            <h3 class="text-lg font-semibold mb-2">Personal Information</h3>
+            <div class="space-y-2">
+              <p>
+                <strong>Full Name:</strong> <span id="view_full_name">—</span>
+              </p>
+              <p><strong>Gender:</strong> <span id="view_gender">—</span></p>
+              <p><strong>Age:</strong> <span id="view_age">—</span></p>
+              <p><strong>Email:</strong> <span id="view_email">—</span></p>
+              <p>
+                <strong>Phone:</strong> <span id="view_phone_number">—</span>
+              </p>
+            </div>
+          </section>
+
+          <section>
+            <h3 class="text-lg font-semibold mb-2">Professional Details</h3>
+            <div class="space-y-2">
+              <p>
+                <strong>Specialization:</strong>
+                <span id="view_specialization">—</span>
+              </p>
+              <p>
+                <strong>Department:</strong> <span id="view_department">—</span>
+              </p>
+              <p>
+                <strong>Experience:</strong>
+                <span id="view_experience_years">—</span>
+              </p>
+              <p>
+                <strong>License No:</strong>
+                <span id="view_bmdc_number">—</span>
+              </p>
+              <p>
+                <strong>Hospital:</strong> <span id="view_hospital">—</span>
+              </p>
+              <p><strong>Address:</strong> <span id="view_address">—</span></p>
+              <p>
+                <strong>Visiting Hours:</strong>
+                <span id="view_visiting_hours">—</span>
+              </p>
+            </div>
+          </section>
+
+          <section>
+            <h3 class="text-lg font-semibold mb-2">Consultation Details</h3>
+            <p><strong>Bio:</strong> <span id="view_bio">—</span></p>
+          </section>
+        </div>
+
+        <!-- Edit Mode -->
+        <form
+          id="profileForm"
+          class="space-y-6 hidden"
+          enctype="multipart/form-data"
+        >
+          <section>
+            <h3 class="text-lg font-semibold mb-2">Personal Information</h3>
+            <input
+              name="full_name"
+              class="input input-bordered w-full mb-2"
+              placeholder="Full Name"
+            />
+            <select name="gender" class="select select-bordered w-full mb-2">
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+            <input
+              name="age"
+              type="number"
+              class="input input-bordered w-full"
+              placeholder="Age"
+            />
+            <input
+              name="email"
+              type="email"
+              class="input input-bordered w-full mb-2"
+              readonly
+            />
+            <input
+              name="phone_number"
+              class="input input-bordered w-full"
+              placeholder="Phone Number"
+            />
+          </section>
+
+          <section>
+            <h3 class="text-lg font-semibold mb-2">Professional Details</h3>
+            <input
+              name="specialization"
+              class="input input-bordered w-full mb-2"
+              placeholder="Specialization"
+            />
+            <select
+              name="department"
+              class="select select-bordered w-full mb-2"
+            >
+              <option value="">Select Department</option>
+              <option>Cardiology</option>
+              <option>General Medicine</option>
+              <option>Pediatrics</option>
+              <option>Orthopedics</option>
+              <option>Gynecology</option>
+              <option>Neurology</option>
+            </select>
+            <input
+              name="experience_years"
+              type="number"
+              class="input input-bordered w-full mb-2"
+              placeholder="Years of Experience"
+            />
+            <input
+              name="bmdc_number"
+              class="input input-bordered w-full mb-2"
+              readonly
+              placeholder="Medical License Number"
+            />
+            <input
+              name="hospital"
+              class="input input-bordered w-full mb-2"
+              placeholder="Hospital/Chamber"
+            />
+            <textarea
+              name="address"
+              class="textarea textarea-bordered w-full mb-2"
+              placeholder="Address"
+            ></textarea>
+            <input
+              name="visiting_hours"
+              class="input input-bordered w-full"
+              placeholder="Visiting Hours (e.g., 10:00 - 14:00)"
+            />
+          </section>
+
+          <section>
+            <h3 class="text-lg font-semibold mb-2">Consultation Details</h3>
+            <textarea
+              name="bio"
+              class="textarea textarea-bordered w-full"
+              placeholder="Short Bio or Description"
+            ></textarea>
+          </section>
+        </form>
+      </div>
+    </main>
+
+    <script src="../js/doctor_profile.js"></script>
+    <script>
+      function logout() {
+        fetch("/auth/logout", { method: "POST" })
+          .then(() => (window.location.href = "/"))
+          .catch(() => alert("Logout failed."));
+      }
+    </script>
+  </body>
+</html>

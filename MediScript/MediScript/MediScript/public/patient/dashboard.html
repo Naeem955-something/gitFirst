@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Patient Dashboard - MediScript</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../css/output.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body class="bg-gray-100 flex font-sans">
+    <!-- Sidebar -->
+    <aside class="w-64 h-screen bg-white shadow fixed">
+      <div
+        class="p-6 font-bold text-2xl text-blue-700 border-b border-gray-200"
+      >
+        <i class="fas fa-notes-medical mr-2"></i> MediScript
+      </div>
+      <nav class="mt-4 space-y-2 text-gray-700 font-medium px-4">
+        <a
+          href="dashboard.html"
+          class="flex items-center space-x-2 text-blue-600 font-semibold"
+        >
+          <i class="fas fa-home"></i> <span>Dashboard</span>
+        </a>
+        <a
+          href="patient_profile.html"
+          class="flex items-center space-x-2 hover:text-blue-600"
+        >
+          <i class="fas fa-user"></i> <span>Profile</span>
+        </a>
+        <a
+          href="my_prescriptions.html"
+          class="flex items-center space-x-2 hover:text-blue-600"
+        >
+          <i class="fas fa-prescription"></i> <span>My Prescriptions</span>
+        </a>
+        <a
+          href="refill_request.html"
+          class="flex items-center space-x-2 hover:text-blue-600"
+        >
+          <i class="fas fa-shopping-cart"></i> <span>Refill Request</span>
+        </a>
+        <a
+          href="#"
+          class="flex items-center space-x-2 hover:text-blue-600"
+          title="Doctors Consulted"
+        >
+          <i class="fas fa-user-md"></i> <span>Doctors Consulted</span>
+        </a>
+        <a
+          href="#"
+          class="flex items-center space-x-2 hover:text-blue-600"
+          title="Drug History"
+        >
+          <i class="fas fa-pills"></i> <span>Drug History</span>
+        </a>
+        <a
+          href="#"
+          class="flex items-center space-x-2 hover:text-blue-600"
+          title="Doctor List"
+        >
+          <i class="fas fa-address-book"></i> <span>Doctor List</span>
+        </a>
+        <a
+          href="#"
+          class="flex items-center space-x-2 hover:text-blue-600"
+          title="Report Issue"
+        >
+          <i class="fas fa-flag"></i> <span>Report Issue</span>
+        </a>
+        <a
+          href="#"
+          onclick="logout()"
+          class="flex items-center space-x-2 text-red-600 hover:text-red-800 mt-10"
+        >
+          <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="ml-64 w-full p-6">
+      <!-- Header -->
+      <div
+        class="flex justify-between items-center bg-white p-4 rounded shadow mb-6"
+      >
+        <h1 class="text-2xl font-semibold">
+          Welcome, <span id="patientName">Patient</span>
+        </h1>
+        <img
+          id="patientAvatar"
+          src="../img/default-profile.png"
+          alt="Profile"
+          class="w-12 h-12 rounded-full object-cover border"
+        />
+      </div>
+
+      <!-- Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+        <!-- My Prescriptions -->
+        <div class="bg-white rounded-xl shadow p-6">
+          <i class="fas fa-prescription text-2xl text-blue-600 mb-2"></i>
+          <h2 class="text-lg font-semibold mb-1">My Prescriptions</h2>
+          <p class="text-gray-600 mb-3">
+            View your past and current prescriptions
+          </p>
+          <a
+            href="my_prescriptions.html"
+            class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            >View Prescriptions</a
+          >
+        </div>
+
+        <!-- Refill Request -->
+        <div class="bg-white rounded-xl shadow p-6">
+          <i class="fas fa-shopping-cart text-2xl text-green-600 mb-2"></i>
+          <h2 class="text-lg font-semibold mb-1">Refill Request</h2>
+          <p class="text-gray-600 mb-3">Request refills for your medicines</p>
+          <a
+            href="refill_request.html"
+            class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+            >Request Refill</a
+          >
+        </div>
+
+        <!-- Profile -->
+        <div class="bg-white rounded-xl shadow p-6">
+          <i class="fas fa-user text-2xl text-purple-600 mb-2"></i>
+          <h2 class="text-lg font-semibold mb-1">My Profile</h2>
+          <p class="text-gray-600 mb-3">Update your personal information</p>
+          <a
+            href="patient_profile.html"
+            class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
+            >View Profile</a
+          >
+        </div>
+      </div>
+    </main>
+
+    <script src="../js/patient.js"></script>
+    <script>
+      function logout() {
+        fetch("/auth/logout", { method: "POST" })
+          .then(() => (window.location.href = "/"))
+          .catch(() => alert("Logout failed."));
+      }
+    </script>
+  </body>
+</html>

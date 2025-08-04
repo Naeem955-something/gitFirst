@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Patient Dashboard - MediScript</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body class="bg-gray-100 flex">
+    <!-- Sidebar -->
+    <aside class="w-64 h-screen bg-white shadow fixed">
+      <div
+        class="p-6 font-bold text-2xl text-blue-700 border-b border-gray-200"
+      >
+        <i class="fas fa-notes-medical mr-2"></i> MediScript
+      </div>
+      <nav class="mt-4 space-y-2 text-gray-700 font-medium px-4">
+        <a href="#" class="flex items-center space-x-2 hover:text-blue-600"
+          ><i class="fas fa-chart-pie"></i> <span>Dashboard</span></a
+        >
+        <a
+          href="/dashboard/patient_profile.html"
+          class="flex items-center space-x-2 hover:text-blue-600"
+        >
+          <i class="fas fa-user"></i> <span>Profile</span>
+        </a>
+
+        <a href="#" class="flex items-center space-x-2 hover:text-blue-600"
+          ><i class="fas fa-file-medical"></i> <span>My Prescriptions</span></a
+        >
+        <a href="#" class="flex items-center space-x-2 hover:text-blue-600"
+          ><i class="fas fa-capsules"></i> <span>Refill Requests</span></a
+        >
+        <a href="#" class="flex items-center space-x-2 hover:text-blue-600"
+          ><i class="fas fa-user-md"></i> <span>Doctors Consulted</span></a
+        >
+        <a href="#" class="flex items-center space-x-2 hover:text-blue-600"
+          ><i class="fas fa-pills"></i> <span>Drug History</span></a
+        >
+        <a href="#" class="flex items-center space-x-2 hover:text-blue-600"
+          ><i class="fas fa-address-book"></i> <span>Doctor List</span></a
+        >
+        <a href="#" class="flex items-center space-x-2 hover:text-blue-600"
+          ><i class="fas fa-flag"></i> <span>Report Issue</span></a
+        >
+        <a
+          href="/"
+          class="flex items-center space-x-2 text-red-600 hover:text-red-800 mt-10"
+        >
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <main class="ml-64 w-full p-6 space-y-6">
+      <!-- Top Bar -->
+      <div
+        class="flex justify-between items-center bg-white p-4 rounded shadow"
+      >
+        <h1 class="text-xl font-semibold">
+          Welcome back, <span class="text-blue-700">[Patient Name]</span>!
+        </h1>
+        <div class="flex items-center space-x-4">
+          <div class="relative">
+            <i class="fas fa-bell text-gray-600 text-xl cursor-pointer"></i>
+          </div>
+          <div class="relative">
+            <img
+              src="../images/default-profile.png"
+              alt="Profile"
+              class="w-10 h-10 rounded-full object-cover cursor-pointer"
+            />
+            <div
+              class="absolute right-0 mt-2 w-32 bg-white shadow rounded hidden z-50"
+            >
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+        <!-- Current Prescription -->
+        <div class="bg-white rounded-xl shadow p-4 text-center">
+          <div class="flex justify-center mb-2">
+            <i
+              class="fas fa-file-prescription text-2xl text-blue-600 bg-blue-100 p-3 rounded-full"
+            ></i>
+          </div>
+          <h2 class="font-semibold mb-1">Latest Prescription</h2>
+          <p class="text-sm latest-prescription-date">Issued on ...</p>
+          <p class="text-sm latest-prescription-doctor">By Dr. ...</p>
+          <p class="text-sm mb-2 italic latest-prescription-summary">
+            Diagnosis: ...
+          </p>
+          <button class="bg-blue-600 text-white px-3 py-1 rounded text-sm">
+            View Prescription
+          </button>
+        </div>
+
+        <!-- Refill Requests -->
+        <div class="bg-white rounded-xl shadow p-4 text-center">
+          <div class="flex justify-center mb-2">
+            <i
+              class="fas fa-sync-alt text-2xl text-yellow-600 bg-yellow-100 p-3 rounded-full"
+            ></i>
+          </div>
+          <h2 class="font-semibold mb-1">Refill Requests Status</h2>
+          <p class="text-sm refill-pending">Pending: 0</p>
+          <p class="text-sm refill-approved">Approved: 0</p>
+          <p class="text-sm refill-rejected">Rejected: 0</p>
+          <button class="bg-yellow-600 text-white px-3 py-1 rounded text-sm">
+            Request New Refill
+          </button>
+        </div>
+
+        <!-- Doctors Consulted -->
+        <div class="bg-white rounded-xl shadow p-4 text-center">
+          <div class="flex justify-center mb-2">
+            <i
+              class="fas fa-user-md text-2xl text-green-600 bg-green-100 p-3 rounded-full"
+            ></i>
+          </div>
+          <h2 class="font-semibold mb-1">Consulted Doctors</h2>
+          <p class="text-sm consulted-total">Total: 0</p>
+          <p class="text-sm mb-2 consulted-recent">Recent: Dr. ...</p>
+          <button class="bg-green-600 text-white px-3 py-1 rounded text-sm">
+            View List
+          </button>
+        </div>
+
+        <!-- Drug History -->
+        <div class="bg-white rounded-xl shadow p-4 text-center">
+          <div class="flex justify-center mb-2">
+            <i
+              class="fas fa-pills text-2xl text-purple-600 bg-purple-100 p-3 rounded-full"
+            ></i>
+          </div>
+          <h2 class="font-semibold mb-1">Recent Medicines</h2>
+          <p class="text-sm drug-names">Latest: ...</p>
+          <p class="text-sm mb-2 drug-date">Prescribed on: ...</p>
+          <button class="bg-purple-600 text-white px-3 py-1 rounded text-sm">
+            View History
+          </button>
+        </div>
+      </div>
+
+      <!-- CTA Card -->
+      <div
+        class="bg-blue-100 rounded-xl p-6 flex justify-between items-center shadow mt-6"
+      >
+        <h2 class="text-lg font-medium text-blue-800">
+          Explore doctors available on our platform.
+        </h2>
+        <button class="bg-blue-600 text-white px-4 py-2 rounded">
+          View Doctor List
+        </button>
+      </div>
+    </main>
+    <script src="/js/patient.js"></script>
+  </body>
+</html>
