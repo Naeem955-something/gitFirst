@@ -100,6 +100,8 @@ SQL Injection protection with parameterized queries
 Input validation and session management
 
 👨‍💻 Authors
+
+
 Uzzal Das – 011 231 0198
 Sadman Biazid Arnob – 011 231 0405
 Mohammad Naeem Mollah – 011 231 0202
